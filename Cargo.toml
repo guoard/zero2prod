@@ -11,6 +11,7 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
+serde-aux = "4"
 tracing-actix-web = "0.7"
 secrecy = { version = "0.8", features = ["serde"] }
 tracing-log = "0.1"

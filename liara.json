@@ -1,0 +1,12 @@
+{
+  "platform": "docker",
+  "port": 8000,
+  "app": "zero2prod",
+  "healthCheck": {
+    "command": "curl --fail http://localhost:8000/health_check || exit 1",
+    "interval": 30,
+    "timeout": 15,
+    "retries": 2,
+    "startPeriod": 5
+  }
+}
