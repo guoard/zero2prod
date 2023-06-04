@@ -2,3 +2,6 @@ application:
   host: 0.0.0.0
 database:
   require_ssl: false
+email_client:
+  base_url: "https://mail-service.iran.liara.ir"
+  sender_email: "ali@coderunner.ir"
