@@ -38,10 +38,13 @@ jobs:
             --features ${{ env.SQLX_FEATURES }}
             --no-default-features
             --locked
-      - name: Install postgresql-client
-        run: sudo apt-get update && sudo apt-get install postgresql-client-14 -y
       - name: Migrate database
-        run: SKIP_DOCKER=true ./scripts/init_db.sh
+        run: |
+          sudo apt-get install libpq-dev -y
+          SKIP_DOCKER=true ./scripts/init_db.sh
+      - name: Check sqlx-data.json is up-to-date
+        run: |
+          cargo sqlx prepare --check -- --bin zero2prod
       - name: Run tests
         run: cargo test
 
@@ -83,10 +86,10 @@ jobs:
             --features ${{ env.SQLX_FEATURES }}
             --no-default-features
             --locked
-      - name: Install postgresql-client
-        run: sudo apt-get update && sudo apt-get install postgresql-client -y
       - name: Migrate database
-        run: SKIP_DOCKER=true ./scripts/init_db.sh
+        run: |
+          sudo apt-get install libpq-dev -y
+          SKIP_DOCKER=true ./scripts/init_db.sh
       - name: Linting
         run: cargo clippy -- -D warnings
 
@@ -106,11 +109,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
-      - name: Install postgresql-client
-        run: sudo apt-get update && sudo apt-get install postgresql-client -y
+      - name: Install libpq
+        run: sudo apt-get install libpq-dev -y
       - uses: Swatinem/rust-cache@v2
         with:
           key: sqlx-${{ env.SQLX_VERSION }}
+      - name: Install tarpaulin
+        run: cargo install cargo-tarpaulin
       - name: Install sqlx-cli
         run:
           cargo install sqlx-cli
@@ -121,4 +126,4 @@ jobs:
       - name: Migrate database
         run: SKIP_DOCKER=true ./scripts/init_db.sh
       - name: Generate code coverage
-        run: cargo install cargo-tarpaulin && cargo tarpaulin --verbose --workspace
+        run: cargo tarpaulin --verbose --workspace
