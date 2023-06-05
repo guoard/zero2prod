@@ -3,5 +3,5 @@ application:
 database:
   require_ssl: false
 email_client:
-  base_url: "https://mail-service.iran.liara.ir"
+  base_url: "https://mail-service.iran.liara.ir/api/v1/"
   sender_email: "ali@coderunner.ir"
