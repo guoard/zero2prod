@@ -46,6 +46,7 @@ default-features = false
 features = ["json", "rustls-tls"]
 
 [dev-dependencies]
+linkify = "0.9"
 serde_json = "1"
 wiremock = "0.5"
 quickcheck = "0.9.2"
