@@ -11,6 +11,8 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
+thiserror = "1"
+anyhow = "1"
 rand = { version = "0.8", features=["std_rng"] }
 validator = "0.16"
 unicode-segmentation = "1"
