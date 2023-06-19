@@ -11,6 +11,8 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
+sha3 = "0.9"
+base64 = "0.21"
 thiserror = "1"
 anyhow = "1"
 rand = { version = "0.8", features=["std_rng"] }
