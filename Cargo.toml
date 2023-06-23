@@ -11,6 +11,7 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
+actix-web-flash-messages = { version = "0.4", features = ["cookies"] }
 htmlescape = "0.3"
 urlencoding = "2"
 argon2 = { version = "0.4", features = ["std"] }
