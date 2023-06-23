@@ -11,9 +11,6 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
-hex = "0.4"
-hmac = { version = "0.12", features = ["std"] }
-sha2 = "0.10"
 htmlescape = "0.3"
 urlencoding = "2"
 argon2 = { version = "0.4", features = ["std"] }
@@ -53,7 +50,7 @@ features = [
 [dependencies.reqwest]
 version = "0.11"
 default-features = false
-features = ["json", "rustls-tls"]
+features = ["json", "rustls-tls", "cookies"]
 
 [dev-dependencies]
 linkify = "0.9"
