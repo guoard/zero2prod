@@ -11,6 +11,7 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
+actix-session = { version = "0.7", features = ["redis-rs-tls-session"] }
 actix-web-flash-messages = { version = "0.4", features = ["cookies"] }
 htmlescape = "0.3"
 urlencoding = "2"
@@ -32,7 +33,7 @@ config = "0.13"
 actix-web = "4"
 tokio = { version = "1", features = ["rt", "macros", "rt-multi-thread"] }
 serde = { version = "1", features = ["derive"]}
-uuid = { version = "1", features = ["v4"] }
+uuid = { version = "1", features = ["v4", "serde"] }
 chrono = { version = "0.4.22", default-features = false, features = ["clock"] }
 
 [dependencies.sqlx]
