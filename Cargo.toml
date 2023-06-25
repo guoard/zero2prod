@@ -11,6 +11,7 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
+actix-web-lab = "0.18"
 serde_json = "1"
 actix-session = { version = "0.7", features = ["redis-rs-tls-session"] }
 actix-web-flash-messages = { version = "0.4", features = ["cookies"] }
