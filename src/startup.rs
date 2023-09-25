@@ -14,8 +14,7 @@ use actix_web::{dev::Server, web, App, HttpServer};
 use actix_web_flash_messages::storage::CookieMessageStore;
 use actix_web_flash_messages::FlashMessagesFramework;
 use actix_web_lab::middleware::from_fn;
-use secrecy::ExposeSecret;
-use secrecy::Secret;
+use secrecy::{ExposeSecret, Secret};
 use sqlx::{postgres::PgPoolOptions, PgPool};
 use std::net::TcpListener;
 use tracing_actix_web::TracingLogger;
@@ -73,9 +72,7 @@ pub async fn run(
 }
 
 pub fn get_connection_pool(configuration: &DatabaseSettings) -> PgPool {
-    PgPoolOptions::new()
-        .acquire_timeout(std::time::Duration::from_secs(2))
-        .connect_lazy_with(configuration.with_db())
+    PgPoolOptions::new().connect_lazy_with(configuration.with_db())
 }
 
 pub struct Application {

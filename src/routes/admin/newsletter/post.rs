@@ -8,7 +8,7 @@ use crate::utils::{e500, see_other};
 use actix_web::{web, HttpResponse};
 use actix_web_flash_messages::FlashMessage;
 use anyhow::Context;
-use sqlx::{PgPool, Postgres, Transaction};
+use sqlx::{Executor, PgPool, Postgres, Transaction};
 use uuid::Uuid;
 
 #[derive(serde::Deserialize)]
@@ -81,7 +81,7 @@ async fn insert_newsletter_issue(
     html_content: &str,
 ) -> Result<Uuid, sqlx::Error> {
     let newsletter_issue_id = Uuid::new_v4();
-    sqlx::query!(
+    let query = sqlx::query!(
         r#"
         INSERT INTO newsletter_issues (
             newsletter_issue_id,
@@ -96,9 +96,9 @@ async fn insert_newsletter_issue(
         title,
         text_content,
         html_content
-    )
-    .execute(transaction)
-    .await?;
+    );
+    transaction.execute(query).await?;
+
     Ok(newsletter_issue_id)
 }
 
@@ -107,7 +107,7 @@ async fn enqueue_delivery_tasks(
     transaction: &mut Transaction<'_, Postgres>,
     newsletter_issue_id: Uuid,
 ) -> Result<(), sqlx::Error> {
-    sqlx::query!(
+    let query = sqlx::query!(
         r#"
         INSERT INTO issue_delivery_queue (
             newsletter_issue_id,
@@ -118,8 +118,8 @@ async fn enqueue_delivery_tasks(
         WHERE status = 'confirmed'
         "#,
         newsletter_issue_id,
-    )
-    .execute(transaction)
-    .await?;
+    );
+    transaction.execute(query).await?;
+
     Ok(())
 }

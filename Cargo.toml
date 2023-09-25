@@ -39,7 +39,7 @@ uuid = { version = "1", features = ["v4", "serde"] }
 chrono = { version = "0.4.22", default-features = false, features = ["clock"] }
 
 [dependencies.sqlx]
-version = "0.6"
+version = "0.7"
 default-features = false
 features = [
     "runtime-tokio-rustls",
@@ -48,7 +48,6 @@ features = [
     "uuid",
     "chrono",
     "migrate",
-    "offline"
 ]
 
 [dependencies.reqwest]
