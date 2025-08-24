@@ -1,13 +1,13 @@
 use crate::domain::{NewSubscriber, SubscriberEmail, SubscriberName};
 use crate::email_client::EmailClient;
 use crate::startup::ApplicationBaseUrl;
-use actix_web::http::StatusCode;
 use actix_web::ResponseError;
-use actix_web::{web, HttpResponse};
+use actix_web::http::StatusCode;
+use actix_web::{HttpResponse, web};
 use anyhow::Context;
 use chrono::Utc;
 use rand::distributions::Alphanumeric;
-use rand::{thread_rng, Rng};
+use rand::{Rng, thread_rng};
 use sqlx::{Executor, PgPool, Postgres, Transaction};
 use uuid::Uuid;
 

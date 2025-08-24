@@ -3,7 +3,7 @@ use crate::email_client::EmailClient;
 use crate::{configuration::Settings, startup::get_connection_pool};
 use sqlx::{PgPool, Postgres, Transaction};
 use std::time::Duration;
-use tracing::{field::display, Span};
+use tracing::{Span, field::display};
 use uuid::Uuid;
 
 pub enum ExecutionOutcome {

@@ -1,7 +1,7 @@
-use crate::helpers::{assert_is_redirect_to, spawn_app, ConfirmationLinks, TestApp};
+use crate::helpers::{ConfirmationLinks, TestApp, assert_is_redirect_to, spawn_app};
+use fake::Fake;
 use fake::faker::internet::en::SafeEmail;
 use fake::faker::name::en::Name;
-use fake::Fake;
 use std::time::Duration;
 use wiremock::matchers::{any, method};
 use wiremock::{Mock, ResponseTemplate};

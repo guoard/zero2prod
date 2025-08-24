@@ -1,11 +1,11 @@
 use crate::authentication::UserId;
 use crate::domain::SubscriberEmail;
-use crate::idempotency::save_response;
 use crate::idempotency::IdempotencyKey;
-use crate::idempotency::{try_processing, NextAction};
+use crate::idempotency::save_response;
+use crate::idempotency::{NextAction, try_processing};
 use crate::utils::e400;
 use crate::utils::{e500, see_other};
-use actix_web::{web, HttpResponse};
+use actix_web::{HttpResponse, web};
 use actix_web_flash_messages::FlashMessage;
 use anyhow::Context;
 use sqlx::{Executor, PgPool, Postgres, Transaction};

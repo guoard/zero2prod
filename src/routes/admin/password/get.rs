@@ -1,7 +1,7 @@
 use crate::authentication::UserId;
+use actix_web::HttpResponse;
 use actix_web::http::header::ContentType;
 use actix_web::web;
-use actix_web::HttpResponse;
 use actix_web_flash_messages::IncomingFlashMessages;
 use std::fmt::Write;
 
