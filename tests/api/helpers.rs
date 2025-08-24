@@ -1,7 +1,7 @@
 use argon2::password_hash::SaltString;
 use argon2::{Algorithm, Argon2, Params, PasswordHasher, Version};
-use once_cell::sync::Lazy;
 use sqlx::{Connection, Executor, PgConnection, PgPool};
+use std::sync::LazyLock;
 use uuid::Uuid;
 use wiremock::MockServer;
 use zero2prod::configuration::{DatabaseSettings, get_configuration};
@@ -10,7 +10,7 @@ use zero2prod::issue_delivery_worker::{ExecutionOutcome, try_execute_task};
 use zero2prod::startup::{Application, get_connection_pool};
 use zero2prod::telemetry::{get_subscriber, init_subscriber};
 
-static TRACING: Lazy<()> = Lazy::new(|| {
+static TRACING: LazyLock<()> = LazyLock::new(|| {
     let default_filter_level = "info".to_string();
     let subscriber_name = "test".to_string();
 
@@ -225,7 +225,7 @@ impl TestApp {
 }
 
 pub async fn spawn_app() -> TestApp {
-    Lazy::force(&TRACING);
+    LazyLock::force(&TRACING);
 
     let email_server = MockServer::start().await;
 
