@@ -89,11 +89,11 @@ impl TestUser {
 impl TestApp {
     pub async fn dispatch_all_pending_emails(&self) {
         loop {
-            if let ExecutionOutcome::EmptyQueue =
-                try_execute_task(&self.db_pool, &self.email_client)
-                    .await
-                    .unwrap()
-            {
+            let task_future = try_execute_task(&self.db_pool, &self.email_client)
+                .await
+                .unwrap();
+
+            if let ExecutionOutcome::EmptyQueue = task_future {
                 break;
             }
         }
