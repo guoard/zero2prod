@@ -2,7 +2,6 @@ use crate::idempotency::IdempotencyKey;
 use actix_web::body::to_bytes;
 use actix_web::http::StatusCode;
 use actix_web::HttpResponse;
-use sqlx::postgres::PgHasArrayType;
 use sqlx::{Executor, PgPool};
 use sqlx::{Postgres, Transaction};
 use uuid::Uuid;
@@ -92,12 +91,6 @@ pub async fn save_response(
     // `HttpResponse<Bytes>` to `HttpResponse<BoxBody>`
     let http_response = response_head.set_body(body).map_into_boxed_body();
     Ok(http_response)
-}
-
-impl PgHasArrayType for HeaderPairRecord {
-    fn array_type_info() -> sqlx::postgres::PgTypeInfo {
-        sqlx::postgres::PgTypeInfo::with_name("_header_pair")
-    }
 }
 
 #[allow(clippy::large_enum_variant)]
